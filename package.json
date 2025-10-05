@@ -1,0 +1,20 @@
+{
+  "name": "1.converting-first-nodejs-project-monlith-to-microservices",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev-all": "concurrently \"npm run dev --prefix services/user-service\" \"npm run start --prefix api-gateway\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
