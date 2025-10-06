@@ -22,6 +22,37 @@ app.get("/health", async (req, res) => {
 });
 
 app.use(
+  "/api/v2/books",
+  verifyToken,
+  createProxyMiddleware({
+    target: "http://localhost:3500",
+    changeOrigin: true,
+    pathRewrite: {
+      "^": "/api/books",
+    },
+
+    on: {
+      proxyReq: (proxyReq, req: any, res) => {
+        console.log("[Proxying]", req.method, req.originalUrl);
+        if (
+          req.body &&
+          Object.keys(req.body).length > 0 &&
+          req.headers["content-type"]?.includes("application/json")
+        ) {
+          const bodyData = JSON.stringify(req.body);
+
+          // Update Content-Length
+          proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+          proxyReq.setHeader("Content-Type", "application/json");
+
+          // Write body to the proxy request stream
+          proxyReq.write(bodyData);
+        }
+      },
+    },
+  })
+);
+app.use(
   "/api/v1/books",
   verifyToken,
   createProxyMiddleware({

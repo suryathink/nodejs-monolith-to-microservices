@@ -19,6 +19,22 @@ const router = express.Router();
 router.post('/register', userValidationRules.register, validate, registerUser);
 router.post('/login', userValidationRules.login, validate, loginUser);
 
+router.post('/current',  getCurrentUser);
+router.post('/update',  updateUser);
+router.post('/change-password',  changePassword);
+router.delete('/delete',  deleteUser);
+
+
+// todo LATER
+// only admin routes
+// todo add admin protection
+router.get('/users',  getAllUsers);
+router.get('/users/:id',  getUserById);
+router.post('/users/:id',  adminUpdateUser);
+
+
+
+
 // Protected routes (require authentication)
 router.use(protect);
 

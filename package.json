@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev-all": "concurrently \"npm run dev --prefix services/user-service\" \"npm run start --prefix api-gateway\""
+    "dev-all": "concurrently \"npm run dev --prefix services/user-service\" \"npm run start --prefix api-gateway\" \"npm run dev --prefix services/book-service\" \"npm run dev --prefix services/order-service\""
   },
   "keywords": [],
   "author": "",
